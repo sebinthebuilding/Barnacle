@@ -18,6 +18,9 @@ h1 > p {
     color: #b980ff;
 }
 
+#explorer {
+}
+
 nav > span > button {
     background: none;
     cursor: pointer;
