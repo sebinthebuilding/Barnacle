@@ -9,5 +9,4 @@ async fn main() {
 
 
 pub async fn hashmap_all_tokens(client: &RpcClient) {
-    let x;
 }
