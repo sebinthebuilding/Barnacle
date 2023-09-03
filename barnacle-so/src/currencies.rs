@@ -24,7 +24,7 @@ impl Currency {
         
         client.get_token_supply(&token_mint).await.unwrap().ui_amount.unwrap()
     }
-
+    //TODO: look into why SOL throws a 0 here
     pub async fn market_cap(self, client: &RpcClient) -> f64 {
         let token_mint = Pubkey::from_str(self.mint).unwrap();
         client.get_token_supply(&token_mint).await.unwrap().ui_amount.unwrap() * self.ratio(USDC).await
