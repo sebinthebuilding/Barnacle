@@ -1,6 +1,7 @@
 use std::str::FromStr;
 
 use jup_ag::price;
+use solana_client::nonblocking::rpc_client::RpcClient;
 use solana_sdk::pubkey::Pubkey;
 
 pub struct Currency {
@@ -18,12 +19,15 @@ impl Currency {
         ratio.data.price
     }
 
-    pub async fn circulating_supply(self) -> f64 {
-        0.0
+    pub async fn current_supply(self, client: &RpcClient) -> f64 {
+        let token_mint = Pubkey::from_str(self.mint).unwrap();
+        
+        client.get_token_supply(&token_mint).await.unwrap().ui_amount.unwrap()
     }
 
-    pub async fn outstanding_market_cap(self) -> f64 {
-        0.0
+    pub async fn market_cap(self, client: &RpcClient) -> f64 {
+        let token_mint = Pubkey::from_str(self.mint).unwrap();
+        client.get_token_supply(&token_mint).await.unwrap().ui_amount.unwrap() * self.ratio(USDC).await
     }
     
 }
