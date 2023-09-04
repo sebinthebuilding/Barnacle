@@ -1,4 +1,4 @@
-# Frontend
+# Frontend / App
 ## Watchlist (be able to save any of these frontpage categories in Watchlist)
 
 ## Pairs

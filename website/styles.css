@@ -13,16 +13,12 @@ h1 {
     margin-left: 1%;
 }
 
-#c {
+h1 > p {
     display: inline;
     color: #b980ff;
-
 }
 
-#l {
-    display: inline;
-    color: #14dff1;
-
+#explorer {
 }
 
 nav > span > button {
