@@ -1,3 +1,2 @@
-pub mod currencies;
-
-pub const API_MAINNET: &str = "https://api.mainnet-beta.solana.com";
+pub mod api_urls;
+pub mod tickers;
