@@ -1,5 +1,4 @@
-# Barnacle - a Solana interface highlighting composability.
-
+# Barnacle - Everything Solana
   
   
 
