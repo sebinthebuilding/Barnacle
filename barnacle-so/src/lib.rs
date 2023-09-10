@@ -1,2 +1,2 @@
 pub mod api_urls;
-pub mod tickers;
+pub mod math;
