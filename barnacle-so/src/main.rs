@@ -1,8 +1,8 @@
-use barnacle_so::tickers::get_all_tokens;
+use barnacle_so::math::inverse_volatility;
 
 #[tokio::main]
 async fn main() {
-    let all_tickers = get_all_tokens().await;
-
-    println!("{}", all_tickers)
+    let sol = inverse_volatility().await;
+    println!("{}", sol);
 }
+
