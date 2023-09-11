@@ -1,10 +1,8 @@
-use barnacle_so::math::inverse_volatility;
+use barnacle_so::math::baso_price;
 
 #[tokio::main]
 async fn main() {
-    loop {
-        let sol: f64 = inverse_volatility().await;
-        println!("{}\n", sol);
-    }
+
+    baso_price().await
 }
 
