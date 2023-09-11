@@ -2,7 +2,9 @@ use barnacle_so::math::inverse_volatility;
 
 #[tokio::main]
 async fn main() {
-    let sol = inverse_volatility().await;
-    println!("{}", sol);
+    loop {
+        let sol: f64 = inverse_volatility().await;
+        println!("{}\n", sol);
+    }
 }
 
