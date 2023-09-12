@@ -1,1 +1,0 @@
-pub const MAINNET: &str = "https://api.mainnet-beta.solana.com";
