@@ -8,54 +8,26 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="131dp"
-        android:layout_height="126dp"
+        android:layout_width="94dp"
+        android:layout_height="76dp"
         android:layout_marginStart="140dp"
         android:layout_marginEnd="140dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="60dp"
+        android:importantForAccessibility="no"
         android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/watchlist"
+        android:id="@+id/holdings_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(star)"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="116dp" />
-
-    <Button
-        android:id="@+id/tokens"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tokens"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="42dp" />
-
-    <Button
-        android:id="@+id/liquidity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Liquidity"
-        tools:layout_editor_absoluteX="118dp"
-        tools:layout_editor_absoluteY="42dp" />
-
-    <Button
-        android:id="@+id/holdings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Holdings"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="116dp" />
-
-    <Button
-        android:id="@+id/analytics"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Analytics"
-        tools:layout_editor_absoluteX="271dp"
-        tools:layout_editor_absoluteY="116dp" />
+        android:layout_marginStart="69dp"
+        android:layout_marginBottom="420dp"
+        android:text="@string/holdings_button"
+        app:layout_constraintBottom_toTopOf="@+id/logo"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
