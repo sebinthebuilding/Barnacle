@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
 
         val holdingsButton: Button = findViewById(R.id.holdings_button);
         holdingsButton.setOnClickListener {
-            Toast.makeText(this, "TODO", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "TODO", Toast.LENGTH_LONG).show()
         }
     }
 }
