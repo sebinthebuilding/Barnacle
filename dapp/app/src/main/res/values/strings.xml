@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Barnacle</string>
+    <string name="watchlists_btn">⭐</string>
+    <string name="tokens_btn">Tokens</string>
+    <string name="liquidity_btn">Liquidity</string>
+    <string name="holdings_btn">Holdings</string>
+    <string name="analytics_btn">Analytics</string>
 </resources>
