@@ -24,10 +24,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import random.barnacle.R
-import random.barnacle.screens.FavoritesScreen
-import random.barnacle.screens.NFTsScreen
-import random.barnacle.screens.TokensScreen
+import random.barnacle.screens.EarnScreen
+import random.barnacle.ui.screens.FavoritesScreen
+import random.barnacle.ui.screens.NFTsScreen
+import random.barnacle.ui.screens.TokensScreen
 import random.barnacle.screens.WalletScreen
+import random.barnacle.ui.screens.AnalyticsScreen
 
 @Composable
 fun AppNavGraph() {
@@ -47,8 +49,16 @@ fun AppNavGraph() {
             NFTsScreen(navController)
         }
 
+        composable(Routes.EARN) {
+            EarnScreen(navController)
+        }
+
         composable(Routes.WALLET) {
             WalletScreen(navController)
+        }
+
+        composable(Routes.ANALYTICS) {
+            AnalyticsScreen(navController)
         }
 
     }
@@ -87,6 +97,13 @@ fun NavButtons(navController: NavHostController) {
                 Text(text = "Tokens")
             }
 
+            Button(
+                onClick = { navController.navigate(Routes.NFTs) },
+                modifier = Modifier.padding(4.dp)
+            ) {
+                Text(text = "NFTs")
+            }
+
         }
 
         Row(
@@ -96,16 +113,24 @@ fun NavButtons(navController: NavHostController) {
             horizontalArrangement = Arrangement.Center
         ) {
             Button(
-                onClick = { navController.navigate(Routes.NFTs) },
+                onClick = { navController.navigate(Routes.EARN) },
                 modifier = Modifier.padding(4.dp)
             ) {
-                Text(text = "NFTs")
+                Text(text = "Earn")
             }
+
             Button(
                 onClick = { navController.navigate(Routes.WALLET) },
                 modifier = Modifier.padding(4.dp)
             ) {
                 Text(text = "Wallet")
+            }
+
+            Button(
+                onClick = { navController.navigate(Routes.ANALYTICS) },
+                modifier = Modifier.padding(4.dp)
+            ) {
+                Text(text = "Analytics")
             }
         }
 

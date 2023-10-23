@@ -9,11 +9,11 @@ import androidx.navigation.NavHostController
 import random.barnacle.nav.MainMenu
 
 @Composable
-fun TokensScreen(navController: NavHostController) {
+fun EarnScreen(navController: NavHostController) {
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
         MainMenu(navController)
-        Text(text = "tokes")
+        Text(text = "earn")
     }
 }

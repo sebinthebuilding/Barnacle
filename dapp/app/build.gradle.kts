@@ -68,5 +68,9 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation("io.ktor:ktor-client-core:1.6.2")
+    implementation("io.ktor:ktor-client-android:1.6.2")
+
     implementation("androidx.navigation:navigation-compose:2.7.4")
 }
