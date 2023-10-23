@@ -1,4 +1,4 @@
-package random.barnacle.ui.theme
+package random.barnacle.theme
 
 import android.app.Activity
 import android.os.Build

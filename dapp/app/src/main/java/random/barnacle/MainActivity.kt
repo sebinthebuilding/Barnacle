@@ -8,8 +8,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import random.barnacle.nav.AppNavGraph
-import random.barnacle.ui.theme.BarnacleTheme
+import random.barnacle.nav.NavGraph
+import random.barnacle.theme.BarnacleTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +28,6 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun BarnacleApp() {
-        AppNavGraph()
+        NavGraph()
     }
 }
