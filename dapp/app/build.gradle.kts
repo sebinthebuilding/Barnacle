@@ -73,4 +73,8 @@ dependencies {
     implementation("io.ktor:ktor-client-android:1.6.2")
 
     implementation("androidx.navigation:navigation-compose:2.7.4")
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
 }
