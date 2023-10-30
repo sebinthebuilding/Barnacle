@@ -6,20 +6,32 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import random.barnacle.network.BarnacleApi
+import random.barnacle.network.JupAgPriceApi
+import random.barnacle.network.JupAgTokensApi
 
 class BarnacleViewModel : ViewModel() {
     var barnacleUiState by mutableStateOf("")
         private set
 
+    var ethSolPriceState by mutableStateOf("")
+        private set
+
     init {
-        getAllTokens()
+        showAllTokens()
+        showEthSolPrice()
     }
 
-    private fun getAllTokens() {
+    private fun showAllTokens() {
         viewModelScope.launch {
-            val listResult = BarnacleApi.retrofitService.getAllTokens()
+            val listResult = JupAgTokensApi.client.getAllTokens()
             barnacleUiState = listResult
+        }
+    }
+
+    private fun showEthSolPrice() {
+        viewModelScope.launch {
+            val p = JupAgPriceApi.client.getEthSolPrice()
+            ethSolPriceState = p
         }
     }
 }
