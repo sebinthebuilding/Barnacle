@@ -21,8 +21,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //BarnacleApp()
-                    AllTokens()
+                    BarnacleApp()
                 }
             }
         }
@@ -32,17 +31,4 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun BarnacleApp() {
     NavGraph()
-}
-
-@Composable
-fun AllTokens() {
-    Surface(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        val barnacleViewModel: BarnacleViewModel = viewModel()
-        HomeScreen(
-            barnacleUiState = barnacleViewModel.barnacleUiState
-        )
-    }
 }
