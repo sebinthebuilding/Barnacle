@@ -18,7 +18,5 @@ fun WalletScreen(navController: NavHostController) {
     ) {
         MainMenu(navController)
         Text(text = "wallet")
-        val barnacleViewModel: BarnacleViewModel = viewModel()
-        Text(text = barnacleViewModel.ethSolPriceState)
     }
 }
