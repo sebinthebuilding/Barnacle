@@ -7,9 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import random.barnacle.network.JupAgTokensApi
+import random.barnacle.network.Token
 
-class BarnacleViewModel : ViewModel() {
-    var barnacleUiState by mutableStateOf("")
+class AllTokensViewModel : ViewModel() {
+    var allTokensUiState by mutableStateOf<List<Token>>(emptyList())
         private set
 
     init {
@@ -19,7 +20,7 @@ class BarnacleViewModel : ViewModel() {
     private fun showAllTokens() {
         viewModelScope.launch {
             val listResult = JupAgTokensApi.client.getAllTokens()
-            barnacleUiState = listResult.toString()
+            allTokensUiState = listResult
         }
     }
 }
