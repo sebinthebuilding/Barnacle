@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import random.barnacle.AllTokensViewModel
+import random.barnacle.AppUiState
 import random.barnacle.nav.MainMenu
 
 @Composable
@@ -17,7 +18,11 @@ fun TokensScreen(navController: NavHostController) {
     ) {
         MainMenu(navController)
         val allTokensViewModel: AllTokensViewModel = viewModel()
-        val noOfTokes = allTokensViewModel.allTokensUiState.size
-        Text(text = "$noOfTokes")
+
+        when (val allTokens = allTokensViewModel.allTokensUiState) {
+            is AppUiState.Loading -> Text(text = "loading..")
+            is AppUiState.Success ->  Text(allTokens.tokens)
+            is AppUiState.Error -> Text(text = "Error")
+        }
     }
 }
