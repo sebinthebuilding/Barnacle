@@ -17,7 +17,7 @@ fun TokensScreen(navController: NavHostController) {
         modifier = Modifier.fillMaxSize()
     ) {
         MainMenu(navController)
-        val allTokensViewModel: AllTokensViewModel = viewModel()
+        val allTokensViewModel: AllTokensViewModel = viewModel(factory = AllTokensViewModel.Factory)
 
         when (val allTokens = allTokensViewModel.allTokensUiState) {
             is AppUiState.Loading -> Text(text = "loading..")
