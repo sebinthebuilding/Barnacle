@@ -4,12 +4,12 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import random.barnacle.screens.AnalyticsScreen
 import random.barnacle.screens.EarnScreen
 import random.barnacle.screens.FavoritesScreen
 import random.barnacle.screens.NFTsScreen
 import random.barnacle.screens.TokensScreen
 import random.barnacle.screens.WalletScreen
-import random.barnacle.screens.AnalyticsScreen
 
 @Composable
 fun NavGraph() {

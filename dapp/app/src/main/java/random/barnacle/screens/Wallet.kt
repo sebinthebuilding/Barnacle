@@ -5,11 +5,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import random.barnacle.BarnacleViewModel
 import random.barnacle.nav.MainMenu
-import random.barnacle.nav.Routes
 
 @Composable
 fun WalletScreen(navController: NavHostController) {
@@ -18,7 +15,5 @@ fun WalletScreen(navController: NavHostController) {
     ) {
         MainMenu(navController)
         Text(text = "wallet")
-        val barnacleViewModel: BarnacleViewModel = viewModel()
-        Text(text = barnacleViewModel.ethSolPriceState)
     }
 }
