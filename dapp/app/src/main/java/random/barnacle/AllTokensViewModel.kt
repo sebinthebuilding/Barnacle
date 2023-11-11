@@ -10,13 +10,11 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import kotlinx.coroutines.launch
-import random.barnacle.data.NetworkTokensRepository
 import random.barnacle.data.TokensRepository
-import random.barnacle.network.AppApiService
 import java.io.IOException
 
 sealed interface AppUiState {
-    data class Success(val tokens: String) : AppUiState
+    data class Success(val tokenTickers: String) : AppUiState
     object Error : AppUiState
     object Loading : AppUiState
 }

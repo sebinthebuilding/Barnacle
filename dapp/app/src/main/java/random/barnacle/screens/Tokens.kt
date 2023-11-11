@@ -21,7 +21,7 @@ fun TokensScreen(navController: NavHostController) {
 
         when (val allTokens = allTokensViewModel.allTokensUiState) {
             is AppUiState.Loading -> Text(text = "loading..")
-            is AppUiState.Success ->  Text(allTokens.tokens)
+            is AppUiState.Success ->  Text(text = "There are ${allTokens.tokenTickers} tokens, of those ${allTokens.tokenTickers} {} are 'strict'")
             is AppUiState.Error -> Text(text = "Error")
         }
     }
