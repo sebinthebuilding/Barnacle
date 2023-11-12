@@ -1,7 +1,7 @@
-package random.barnacle.network
+package random.barnacle.model
 
 data class Token(
-    val address: String,
+    var address: String,
     val chainId: Int,
     val decimals: Int,
     val extensions: Extensions,
@@ -9,4 +9,9 @@ data class Token(
     val name: String,
     val symbol: String,
     val tags: List<String>
+)
+
+data class Extensions(
+    val coingeckoId: String,
+    val isBanned: Boolean
 )

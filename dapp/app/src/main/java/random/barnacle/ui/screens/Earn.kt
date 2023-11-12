@@ -1,4 +1,4 @@
-package random.barnacle.screens
+package random.barnacle.ui.screens
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
@@ -9,15 +9,11 @@ import androidx.navigation.NavHostController
 import random.barnacle.nav.MainMenu
 
 @Composable
-fun FavoritesScreen(navController: NavHostController) {
+fun EarnScreen(navController: NavHostController) {
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
         MainMenu(navController)
-        Text(
-            text = "faves"
-        )
+        Text(text = "earn")
     }
 }
-
-

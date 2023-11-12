@@ -1,4 +1,4 @@
-package random.barnacle.screens
+package random.barnacle.ui.screens
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
