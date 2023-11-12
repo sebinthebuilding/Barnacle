@@ -14,18 +14,18 @@ import random.barnacle.data.TokensRepository
 import random.barnacle.model.Token
 import java.io.IOException
 
-sealed interface AppUiState {
-    data class Success(val count: String) : AppUiState
-    object Error : AppUiState
-    object Loading : AppUiState
+sealed interface TokenUiState {
+    data class Success(val tokens: List<Token>) : TokenUiState
+    object Error : TokenUiState
+    object Loading : TokenUiState
 }
 
 // Android framework does not allow passed values in ViewModel constructor on it's creation. We need a Factory.
 class TokensViewModel(private val tokensRepository: TokensRepository) : ViewModel() {
-    var allTokensUiState: AppUiState by mutableStateOf(AppUiState.Loading)
+    var allTokensUiState: TokenUiState by mutableStateOf(TokenUiState.Loading)
         private set
 
-    var strictTokensUiState: AppUiState by mutableStateOf(AppUiState.Loading)
+    var strictTokensUiState: TokenUiState by mutableStateOf(TokenUiState.Loading)
         private set
 
     init {
@@ -37,9 +37,9 @@ class TokensViewModel(private val tokensRepository: TokensRepository) : ViewMode
         viewModelScope.launch {
             allTokensUiState = try {
                 val listOfAllTokens = tokensRepository.getAllTokens()
-                AppUiState.Success(listOfAllTokens.size.toString())
+                TokenUiState.Success(listOfAllTokens)
             } catch (e: IOException) {
-                AppUiState.Error
+                TokenUiState.Error
             }
         }
     }
@@ -48,9 +48,9 @@ class TokensViewModel(private val tokensRepository: TokensRepository) : ViewMode
         viewModelScope.launch {
             strictTokensUiState = try {
                 val listOfStrictTokens = tokensRepository.getStrictTokens()
-                AppUiState.Success(listOfStrictTokens.size.toString())
+                TokenUiState.Success(listOfStrictTokens)
             } catch (e: IOException) {
-                AppUiState.Error
+                TokenUiState.Error
             }
         }
     }
