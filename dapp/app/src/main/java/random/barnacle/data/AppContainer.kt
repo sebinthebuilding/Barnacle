@@ -5,8 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 interface AppContainer {
-    val allTokensRepository: TokensRepository
-
+    val tokensRepository: TokensRepository
 }
 
 class DefaultAppContainer : AppContainer {
@@ -21,7 +20,7 @@ class DefaultAppContainer : AppContainer {
         retrofitJupAgTokens.create(AppApiService::class.java)
     }
 
-    override val allTokensRepository: TokensRepository by lazy {
+    override val tokensRepository: TokensRepository by lazy {
         NetworkTokensRepository(client)
     }
 }

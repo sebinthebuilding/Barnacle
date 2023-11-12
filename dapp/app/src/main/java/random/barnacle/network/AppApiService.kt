@@ -1,5 +1,6 @@
 package random.barnacle.network
 
+import random.barnacle.model.Token
 import retrofit2.http.GET
 
 interface AppApiService {

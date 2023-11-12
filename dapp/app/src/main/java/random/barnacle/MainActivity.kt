@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import random.barnacle.nav.NavGraph
-import random.barnacle.theme.BarnacleTheme
+import random.barnacle.ui.theme.BarnacleTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -11,30 +11,44 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import kotlinx.coroutines.launch
 import random.barnacle.data.TokensRepository
+import random.barnacle.model.Token
 import java.io.IOException
 
 sealed interface AppUiState {
-    data class Success(val tokenTickers: String) : AppUiState
+    data class Success(val count: String) : AppUiState
     object Error : AppUiState
     object Loading : AppUiState
 }
 
 // Android framework does not allow passed values in ViewModel constructor on it's creation. We need a Factory.
-class AllTokensViewModel(private val allTokensRepository: TokensRepository) : ViewModel() {
+class TokensViewModel(private val tokensRepository: TokensRepository) : ViewModel() {
     var allTokensUiState: AppUiState by mutableStateOf(AppUiState.Loading)
+        private set
+
+    var strictTokensUiState: AppUiState by mutableStateOf(AppUiState.Loading)
         private set
 
     init {
         getAllTokensUiState()
+        getStrictTokensUiState()
     }
 
     private fun getAllTokensUiState() {
         viewModelScope.launch {
             allTokensUiState = try {
-                val listResult = allTokensRepository.getAllTokens()
-                AppUiState.Success(
-                    listResult.size.toString()
-                )
+                val listOfAllTokens = tokensRepository.getAllTokens()
+                AppUiState.Success(listOfAllTokens.size.toString())
+            } catch (e: IOException) {
+                AppUiState.Error
+            }
+        }
+    }
+
+    private fun getStrictTokensUiState() {
+        viewModelScope.launch {
+            strictTokensUiState = try {
+                val listOfStrictTokens = tokensRepository.getStrictTokens()
+                AppUiState.Success(listOfStrictTokens.size.toString())
             } catch (e: IOException) {
                 AppUiState.Error
             }
@@ -45,8 +59,8 @@ class AllTokensViewModel(private val allTokensRepository: TokensRepository) : Vi
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val application = (this[APPLICATION_KEY] as BarnacleApplication)
-                val allTokensRepository = application.container.allTokensRepository
-                AllTokensViewModel(allTokensRepository = allTokensRepository)
+                val tokensRepository = application.container.tokensRepository
+                TokensViewModel(tokensRepository = tokensRepository)
             }
         }
     }

@@ -1,4 +1,4 @@
-package random.barnacle.theme
+package random.barnacle.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
