@@ -1,7 +1,7 @@
 package random.barnacle.model
 
 data class Token(
-    val address: String,
+    var address: String,
     val chainId: Int,
     val decimals: Int,
     val extensions: Extensions,
