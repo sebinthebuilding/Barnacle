@@ -12,11 +12,14 @@ import random.barnacle.ui.screens.FavoritesScreen
 import random.barnacle.ui.screens.NFTsScreen
 import random.barnacle.ui.screens.WalletScreen
 import random.barnacle.ui.screens.tokens.TokensScreen
+import random.barnacle.ui.view_models.PriceViewModel
 import random.barnacle.ui.view_models.TokensViewModel
 
 @Composable
 fun AppUi() {
     val tokensViewModel: TokensViewModel = viewModel(factory = TokensViewModel.Factory)
+
+    val priceViewModel: PriceViewModel = viewModel(factory = PriceViewModel.Factory)
 
     val navController = rememberNavController()
 
@@ -27,7 +30,7 @@ fun AppUi() {
         }
 
         composable(Routes.TOKENS) {
-            TokensScreen(navController, tokensViewModel)
+            TokensScreen(navController, tokensViewModel, priceViewModel)
         }
 
         composable(Routes.NFTs) {

@@ -12,11 +12,11 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import kotlinx.coroutines.launch
 import random.barnacle.App
 import random.barnacle.data.TokensRepository
-import random.barnacle.domain.model.Token
+import random.barnacle.data.models.TokenResponse
 import java.io.IOException
 
 sealed interface TokenUiState {
-    data class Success(val tokens: List<Token>) : TokenUiState
+    data class Success(val tokenResponses: List<TokenResponse>) : TokenUiState
     object Error : TokenUiState
     object Loading : TokenUiState
 }
