@@ -1,4 +1,4 @@
-package random.barnacle.model
+package random.barnacle.domain.model
 
 data class Token(
     var address: String,

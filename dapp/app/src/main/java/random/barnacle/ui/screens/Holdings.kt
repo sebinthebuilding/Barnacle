@@ -6,7 +6,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import random.barnacle.nav.MainMenu
+import random.barnacle.ui.MainMenu
 
 @Composable
 fun WalletScreen(navController: NavHostController) {
@@ -14,6 +14,6 @@ fun WalletScreen(navController: NavHostController) {
         modifier = Modifier.fillMaxSize()
     ) {
         MainMenu(navController)
-        Text(text = "wallet")
+        Text(text = "holdings")
     }
 }

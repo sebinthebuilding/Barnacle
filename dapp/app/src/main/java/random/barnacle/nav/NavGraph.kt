@@ -8,14 +8,14 @@ import random.barnacle.ui.screens.AnalyticsScreen
 import random.barnacle.ui.screens.EarnScreen
 import random.barnacle.ui.screens.FavoritesScreen
 import random.barnacle.ui.screens.NFTsScreen
-import random.barnacle.ui.screens.TokensScreen
+import random.barnacle.ui.screens.tokens.TokensScreen
 import random.barnacle.ui.screens.WalletScreen
 
 @Composable
 fun NavGraph() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Routes.WALLET) {
+    NavHost(navController = navController, startDestination = Routes.HOLDINGS) {
 
         composable(Routes.FAVORITES) {
             FavoritesScreen(navController)
@@ -33,7 +33,7 @@ fun NavGraph() {
             EarnScreen(navController)
         }
 
-        composable(Routes.WALLET) {
+        composable(Routes.HOLDINGS) {
             WalletScreen(navController)
         }
 

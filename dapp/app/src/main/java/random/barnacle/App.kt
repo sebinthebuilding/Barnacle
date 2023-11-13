@@ -4,7 +4,7 @@ import android.app.Application
 import random.barnacle.data.AppContainer
 import random.barnacle.data.DefaultAppContainer
 
-class BarnacleApplication : Application() {
+class App : Application() {
     //lateinit needed bc 'container' will only exist once onCreate() exists.
     lateinit var container: AppContainer
     override fun onCreate() {

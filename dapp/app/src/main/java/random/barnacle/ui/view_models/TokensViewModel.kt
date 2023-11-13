@@ -1,4 +1,4 @@
-package random.barnacle
+package random.barnacle.ui.view_models
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,8 +10,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import kotlinx.coroutines.launch
+import random.barnacle.App
 import random.barnacle.data.TokensRepository
-import random.barnacle.model.Token
+import random.barnacle.domain.model.Token
 import java.io.IOException
 
 sealed interface TokenUiState {
@@ -58,7 +59,7 @@ class TokensViewModel(private val tokensRepository: TokensRepository) : ViewMode
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
-                val application = (this[APPLICATION_KEY] as BarnacleApplication)
+                val application = (this[APPLICATION_KEY] as App)
                 val tokensRepository = application.container.tokensRepository
                 TokensViewModel(tokensRepository = tokensRepository)
             }

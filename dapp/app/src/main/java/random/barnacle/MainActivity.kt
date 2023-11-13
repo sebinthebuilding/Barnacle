@@ -6,10 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import random.barnacle.nav.NavGraph
 import random.barnacle.ui.theme.BarnacleTheme
+import random.barnacle.ui.uiEntrypoint
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,14 +19,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    BarnacleApp()
+                    uiEntrypoint()
                 }
             }
         }
     }
 }
 
-@Composable
-fun BarnacleApp() {
-    NavGraph()
-}
