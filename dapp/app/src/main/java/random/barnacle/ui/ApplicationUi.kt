@@ -1,18 +1,23 @@
-package random.barnacle.nav
+package random.barnacle.ui
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import random.barnacle.Routes
 import random.barnacle.ui.screens.AnalyticsScreen
 import random.barnacle.ui.screens.EarnScreen
 import random.barnacle.ui.screens.FavoritesScreen
 import random.barnacle.ui.screens.NFTsScreen
-import random.barnacle.ui.screens.tokens.TokensScreen
 import random.barnacle.ui.screens.WalletScreen
+import random.barnacle.ui.screens.tokens.TokensScreen
+import random.barnacle.ui.view_models.TokensViewModel
 
 @Composable
-fun NavGraph() {
+fun AppUi() {
+    val tokensViewModel: TokensViewModel = viewModel(factory = TokensViewModel.Factory)
+
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = Routes.HOLDINGS) {
@@ -22,7 +27,7 @@ fun NavGraph() {
         }
 
         composable(Routes.TOKENS) {
-            TokensScreen(navController)
+            TokensScreen(navController, tokensViewModel)
         }
 
         composable(Routes.NFTs) {
@@ -43,4 +48,3 @@ fun NavGraph() {
 
     }
 }
-

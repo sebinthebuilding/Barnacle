@@ -1,4 +1,4 @@
-package random.barnacle.nav
+package random.barnacle
 
 object Routes {
     const val FAVORITES = "/FAVORITES"

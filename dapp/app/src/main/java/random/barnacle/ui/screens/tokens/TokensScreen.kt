@@ -20,7 +20,7 @@ import random.barnacle.ui.view_models.TokenUiState
 import random.barnacle.ui.view_models.TokensViewModel
 
 @Composable
-fun TokensScreen(navController: NavHostController) {
+fun TokensScreen(navController: NavHostController, tokensViewModel: TokensViewModel) {
     Box(modifier = Modifier
             .fillMaxWidth()
     ) {
@@ -28,7 +28,6 @@ fun TokensScreen(navController: NavHostController) {
             navController,
         )
     }
-    val tokensViewModel: TokensViewModel = viewModel(factory = TokensViewModel.Factory)
 
     when (val allTokens = tokensViewModel.allTokensUiState) {
         is TokenUiState.Success -> {
