@@ -1,7 +1,7 @@
-package random.barnacle.data
+package random.barnacle.data.repositories
 
 import random.barnacle.data.models.TokenResponse
-import random.barnacle.network.AppApiService
+import random.barnacle.data.AppApiService
 
 interface TokensRepository {
     suspend fun getAllTokens(): List<TokenResponse>

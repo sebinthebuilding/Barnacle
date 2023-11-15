@@ -1,6 +1,5 @@
-package random.barnacle.network
+package random.barnacle.data
 
-import kotlinx.coroutines.flow.Flow
 import random.barnacle.data.models.PriceResponse
 import random.barnacle.data.models.TokenResponse
 import retrofit2.http.GET
