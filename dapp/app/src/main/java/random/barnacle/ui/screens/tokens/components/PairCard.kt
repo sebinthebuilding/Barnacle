@@ -16,10 +16,12 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import random.barnacle.domain.model.Token
+import kotlinx.coroutines.flow.Flow
+import random.barnacle.data.models.PriceResponse
+import random.barnacle.data.models.TokenResponse
 
 @Composable
-fun PairCard(token: Token, modifier: Modifier = Modifier) {
+fun PairCard(tokenResponse: TokenResponse, usdcPrice: PriceResponse, modifier: Modifier = Modifier) {
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -36,12 +38,12 @@ fun PairCard(token: Token, modifier: Modifier = Modifier) {
                 horizontalArrangement = Arrangement.End
             ) {
                 Text(
-                    text = "1 ${token.symbol}",
+                    text = "1 ${tokenResponse.symbol}",
                     style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold)
                 )
                 Spacer(modifier = Modifier.width(40.dp))
                 Text(
-                    text = "X USDC",
+                    text = "${usdcPrice.timeTaken} USDC",
                     style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold)
                 )
             }

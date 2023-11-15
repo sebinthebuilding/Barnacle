@@ -1,8 +1,6 @@
 package random.barnacle
 
 import android.app.Application
-import random.barnacle.data.AppContainer
-import random.barnacle.data.DefaultAppContainer
 
 class App : Application() {
     //lateinit needed bc 'container' will only exist once onCreate() exists.

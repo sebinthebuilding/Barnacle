@@ -1,19 +1,19 @@
 package random.barnacle.data
 
-import random.barnacle.domain.model.Token
+import random.barnacle.data.models.TokenResponse
 import random.barnacle.network.AppApiService
 
 interface TokensRepository {
-    suspend fun getAllTokens(): List<Token>
-    suspend fun getStrictTokens(): List<Token>
+    suspend fun getAllTokens(): List<TokenResponse>
+    suspend fun getStrictTokens(): List<TokenResponse>
 }
 
-class NetworkTokensRepository(private val client: AppApiService) : TokensRepository {
-    override suspend fun getAllTokens(): List<Token> {
-        return client.getAllTokens()
+class NetworkTokensRepository(private val tokenClient: AppApiService) : TokensRepository {
+    override suspend fun getAllTokens(): List<TokenResponse> {
+        return tokenClient.getAllTokens()
     }
 
-    override suspend fun getStrictTokens(): List<Token> {
-        return client.getStrictTokens()
+    override suspend fun getStrictTokens(): List<TokenResponse> {
+        return tokenClient.getStrictTokens()
     }
 }

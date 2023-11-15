@@ -1,6 +1,6 @@
-package random.barnacle.domain.model
+package random.barnacle.data.models
 
-data class Token(
+data class TokenResponse(
     var address: String,
     val chainId: Int,
     val decimals: Int,
