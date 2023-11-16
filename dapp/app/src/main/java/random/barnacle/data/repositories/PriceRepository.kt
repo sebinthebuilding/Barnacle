@@ -1,8 +1,7 @@
-package random.barnacle.data
+package random.barnacle.data.repositories
 
-import kotlinx.coroutines.flow.Flow
 import random.barnacle.data.models.PriceResponse
-import random.barnacle.network.AppApiService
+import random.barnacle.data.AppApiService
 
 interface PriceRepository {
     suspend fun getUsdcPrice(splTokenAdress: String): PriceResponse

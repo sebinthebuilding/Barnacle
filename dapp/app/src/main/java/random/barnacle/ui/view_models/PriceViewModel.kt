@@ -6,15 +6,16 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import random.barnacle.App
-import random.barnacle.data.PriceRepository
+import random.barnacle.data.repositories.PriceRepository
 import random.barnacle.data.models.PriceResponse
 
 
-// Android framework does not allow passed values in ViewModel constructor on it's creation. We need a Factory.
-class PriceViewModel(private val priceRepository: PriceRepository, private val mSolAddress: String) : ViewModel() {
+// Android framework does not allow passed values in ViewModel constructor on it's creation, thus we need a Factory.
+class PriceViewModel(private val priceRepository: PriceRepository) : ViewModel() {
+
+    val mSolAddress = "mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So"
     lateinit var usdcPriceUiState: PriceResponse
         private set
 
@@ -32,7 +33,7 @@ class PriceViewModel(private val priceRepository: PriceRepository, private val m
             initializer {
                 val application = (this[APPLICATION_KEY] as App)
                 val priceRepository = application.container.priceRepository
-                PriceViewModel(priceRepository = priceRepository, mSolAddress = "mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So")
+                PriceViewModel(priceRepository = priceRepository)
             }
         }
     }
