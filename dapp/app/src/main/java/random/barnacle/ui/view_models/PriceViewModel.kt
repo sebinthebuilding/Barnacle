@@ -6,26 +6,32 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import random.barnacle.App
 import random.barnacle.data.repositories.PriceRepository
-import random.barnacle.data.models.PriceResponse
+import random.barnacle.data.repositories.TokensRepository
+import random.barnacle.domain.use_cases.PriceUseCase
 
 
 // Android framework does not allow passed values in ViewModel constructor on it's creation, thus we need a Factory.
-class PriceViewModel(private val priceRepository: PriceRepository) : ViewModel() {
+class PriceViewModel(private val priceRepository: PriceRepository, private val tokensRepository: TokensRepository) : ViewModel() {
 
-    val mSolAddress = "mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So"
-    lateinit var usdcPriceUiState: PriceResponse
-        private set
+    val usdcPriceUiState: MutableStateFlow<Map<String, Double>> = MutableStateFlow<Map<String, Double>>(emptyMap())
 
     init {
-        getUsdcPriceUiState()
+        streamUsdcPriceUiState()
     }
 
-    private fun getUsdcPriceUiState() {
+    private fun streamUsdcPriceUiState() {
         viewModelScope.launch {
-            usdcPriceUiState = priceRepository.getUsdcPrice(mSolAddress)
+            while (true) {
+                val price = PriceUseCase(priceRepository, tokensRepository).usdcPrice()
+                usdcPriceUiState.emit(price)
+                delay(5000)
+            }
+
         }
     }
     companion object {
@@ -33,7 +39,8 @@ class PriceViewModel(private val priceRepository: PriceRepository) : ViewModel()
             initializer {
                 val application = (this[APPLICATION_KEY] as App)
                 val priceRepository = application.container.priceRepository
-                PriceViewModel(priceRepository = priceRepository)
+                val tokensRepository = application.container.tokensRepository
+                PriceViewModel(priceRepository, tokensRepository)
             }
         }
     }

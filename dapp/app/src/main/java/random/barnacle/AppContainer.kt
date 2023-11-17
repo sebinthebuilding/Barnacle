@@ -1,10 +1,10 @@
 package random.barnacle
 
+import random.barnacle.data.AppApiService
 import random.barnacle.data.repositories.NetworkPriceRepository
 import random.barnacle.data.repositories.NetworkTokensRepository
 import random.barnacle.data.repositories.PriceRepository
 import random.barnacle.data.repositories.TokensRepository
-import random.barnacle.data.AppApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

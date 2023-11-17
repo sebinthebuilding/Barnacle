@@ -14,10 +14,10 @@ import random.barnacle.domain.models.TokenModel
 
 // Android framework does not allow passed values in ViewModel constructor on it's creation. We need a Factory.
 class TokensViewModel(private val tokensRepository: TokensRepository) : ViewModel() {
-    lateinit var allTokensUiState: List<TokenModel>
+    var allTokensUiState: List<TokenModel> = emptyList()
         private set
 
-    lateinit var strictTokensUiState: List<TokenModel>
+    var strictTokensUiState: List<TokenModel> = emptyList()
         private set
 
     init {
