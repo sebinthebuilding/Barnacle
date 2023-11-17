@@ -1,7 +1,6 @@
 package random.barnacle.domain.use_cases
 
 import android.util.Log
-import random.barnacle.data.models.PriceResponse
 import random.barnacle.data.repositories.PriceRepository
 import random.barnacle.data.repositories.TokensRepository
 

@@ -6,10 +6,11 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import random.barnacle.App
 import random.barnacle.data.repositories.PriceRepository
-import random.barnacle.data.models.PriceResponse
 import random.barnacle.data.repositories.TokensRepository
 import random.barnacle.domain.use_cases.PriceUseCase
 
@@ -17,16 +18,20 @@ import random.barnacle.domain.use_cases.PriceUseCase
 // Android framework does not allow passed values in ViewModel constructor on it's creation, thus we need a Factory.
 class PriceViewModel(private val priceRepository: PriceRepository, private val tokensRepository: TokensRepository) : ViewModel() {
 
-    lateinit var usdcPriceUiState: Map<String, Double>
-        private set
+    val usdcPriceUiState: MutableStateFlow<Map<String, Double>> = MutableStateFlow<Map<String, Double>>(emptyMap())
 
     init {
-        getUsdcPriceUiState()
+        streamUsdcPriceUiState()
     }
 
-    private fun getUsdcPriceUiState() {
+    private fun streamUsdcPriceUiState() {
         viewModelScope.launch {
-            usdcPriceUiState = PriceUseCase(priceRepository, tokensRepository).usdcPrice()
+            while (true) {
+                val price = PriceUseCase(priceRepository, tokensRepository).usdcPrice()
+                usdcPriceUiState.emit(price)
+                delay(5000)
+            }
+
         }
     }
     companion object {

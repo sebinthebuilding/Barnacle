@@ -1,8 +1,7 @@
 package random.barnacle.data.repositories
 
-import android.util.Log
-import random.barnacle.data.models.PriceResponse
 import random.barnacle.data.AppApiService
+import random.barnacle.data.models.PriceResponse
 
 interface PriceRepository {
     suspend fun getUsdcPrice(splTokenAdresses: String): PriceResponse
