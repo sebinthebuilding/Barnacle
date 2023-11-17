@@ -21,6 +21,7 @@ fun AppUi() {
 
     val priceViewModel: PriceViewModel = viewModel(factory = PriceViewModel.Factory)
 
+
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = Routes.HOLDINGS) {

@@ -1,14 +1,27 @@
 package random.barnacle.domain.use_cases
 
-import kotlinx.coroutines.flow.StateFlow
+import android.util.Log
 import random.barnacle.data.models.PriceResponse
 import random.barnacle.data.repositories.PriceRepository
 import random.barnacle.data.repositories.TokensRepository
 
 class PriceUseCase(private val priceRepository: PriceRepository, private val tokensRepository: TokensRepository) {
 
-    suspend fun usdcPrice(): PriceResponse {
-        val allTokens = TokensUseCase(tokensRepository).getAllTokensUseCase()
-        return priceRepository.getUsdcPrice(allTokens[1].address)
+    suspend fun usdcPrice(): Map<String, Double> {
+        val tokens = TokensUseCase(tokensRepository).getAllTokensUseCase()
+        var tokenPriceMap = mutableMapOf<String, Double>()
+
+        tokens.forEach { token ->
+            val prices = priceRepository.getUsdcPrice(token.address)
+            prices.data[token.address]?.price?.let { price ->
+                tokenPriceMap[token.address] = price
+            }
+
+            Log.d("PRICES_BOI", prices.toString())
+        }
+
+        Log.d("MAP_BOODGE", tokenPriceMap.toString())
+
+        return tokenPriceMap
     }
 }

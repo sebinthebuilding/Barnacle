@@ -17,7 +17,7 @@ import random.barnacle.domain.use_cases.PriceUseCase
 // Android framework does not allow passed values in ViewModel constructor on it's creation, thus we need a Factory.
 class PriceViewModel(private val priceRepository: PriceRepository, private val tokensRepository: TokensRepository) : ViewModel() {
 
-    lateinit var usdcPriceUiState: PriceResponse
+    lateinit var usdcPriceUiState: Map<String, Double>
         private set
 
     init {

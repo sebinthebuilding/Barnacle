@@ -21,7 +21,7 @@ import random.barnacle.data.models.TokenResponse
 import random.barnacle.domain.models.TokenModel
 
 @Composable
-fun PairCard(token: TokenModel, usdcPrice: PriceResponse, modifier: Modifier = Modifier) {
+fun PairCard(token: TokenModel, usdcPrices: Map<String, Double>, modifier: Modifier = Modifier) {
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -42,8 +42,9 @@ fun PairCard(token: TokenModel, usdcPrice: PriceResponse, modifier: Modifier = M
                     style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold)
                 )
                 Spacer(modifier = Modifier.width(40.dp))
+                val usdcValue = usdcPrices[token.address]?.toString() ?: "n/a"
                 Text(
-                    text = "${usdcPrice.data[token.address]?.price} USDC",
+                    text = "$usdcValue USDC",
                     style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold)
                 )
             }
