@@ -1,6 +1,7 @@
 package random.barnacle.ui.screens.tokens.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -45,7 +46,9 @@ fun PairCard(token: TokenModel, usdcPrices: Map<String, Double>, modifier: Modif
             Icon(
                 imageVector = Icons.Default.FavoriteBorder,
                 contentDescription = null,
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier
+                    .size(24.dp)
+                    .clickable {  }
             )
 
             Spacer(modifier = Modifier.width(16.dp))
