@@ -21,9 +21,10 @@ class DefaultAppContainer : AppContainer {
         .baseUrl(urlJupAgTokens)
         .build()
 
+    private val urlJupAgPrice = "https://price.jup.ag/"
     private val retrofitJupAgPrice = Retrofit.Builder()
         .addConverterFactory((GsonConverterFactory.create()))
-        .baseUrl("https://price.jup.ag/")
+        .baseUrl(urlJupAgPrice)
         .build()
 
     private val tokenClient : AppApiService by lazy {

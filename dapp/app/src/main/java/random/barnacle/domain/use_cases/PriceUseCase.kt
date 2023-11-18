@@ -6,9 +6,9 @@ import random.barnacle.data.repositories.TokensRepository
 
 class PriceUseCase(private val priceRepository: PriceRepository, private val tokensRepository: TokensRepository) {
 
-    suspend fun usdcPrice(): Map<String, Double> {
+    suspend fun getPrice(): Map<String, Double> {
         val tokens = TokensUseCase(tokensRepository).getAllTokensUseCase()
-        var tokenPriceMap = mutableMapOf<String, Double>()
+        val tokenPriceMap = mutableMapOf<String, Double>()
 
         tokens.forEach { token ->
             val prices = priceRepository.getUsdcPrice(token.address)

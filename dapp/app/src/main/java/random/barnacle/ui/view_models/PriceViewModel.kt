@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import random.barnacle.App
@@ -27,11 +26,9 @@ class PriceViewModel(private val priceRepository: PriceRepository, private val t
     private fun streamUsdcPriceUiState() {
         viewModelScope.launch {
             while (true) {
-                val price = PriceUseCase(priceRepository, tokensRepository).usdcPrice()
+                val price = PriceUseCase(priceRepository, tokensRepository).getPrice()
                 usdcPriceUiState.emit(price)
-                delay(5000)
             }
-
         }
     }
     companion object {
