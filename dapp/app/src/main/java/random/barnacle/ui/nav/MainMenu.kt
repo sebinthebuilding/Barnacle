@@ -1,6 +1,5 @@
-package random.barnacle.ui
+package random.barnacle.ui.nav
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -18,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import random.barnacle.R
 
 @Composable
 fun MainMenu(navController: NavHostController) {
@@ -98,13 +96,4 @@ fun NavButtons(navController: NavHostController) {
         }
 
     }
-}
-
-object Routes {
-    const val FAVORITES = "/FAVORITES"
-    const val TOKENS = "/TOKENS"
-    const val NFTs = "/NFTs"
-    const val EARN = "/EARN"
-    const val HOLDINGS = "/HOLDINGS"
-    const val ANALYTICS = "/ANALYTICS"
 }
