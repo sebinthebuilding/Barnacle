@@ -1,4 +1,4 @@
-package random.barnacle.ui
+package random.barnacle.ui.nav
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import random.barnacle.Routes
 
 @Composable
 fun MainMenu(navController: NavHostController) {

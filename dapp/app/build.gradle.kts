@@ -78,6 +78,6 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0-beta01")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0-rc01")
 
 }
