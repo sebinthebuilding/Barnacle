@@ -1,4 +1,3 @@
-package random.barnacle.ui.screens.tokens.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -12,20 +11,29 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun QuoteCurrencyFilters() {
     Row {
-        OutlinedButton(
-            onClick = { /* Handle USDC button click */ },
-            contentPadding = ButtonDefaults.ContentPadding,
-            modifier = Modifier.padding(8.dp) // Adjust padding as needed
-        ) {
-            Text(text = "USDC")
-        }
+        TabButton(
+            text = "USDC",
+            onClick = { /* Handle USDC button click */ }
+        )
 
-        OutlinedButton(
-            onClick = { /* Handle SOL button click */ },
-            contentPadding = ButtonDefaults.ContentPadding,
-            modifier = Modifier.padding(8.dp) // Adjust padding as needed
-        ) {
-            Text(text = "SOL")
-        }
+        TabButton(
+            text = "SOL",
+            onClick = { /* Handle SOL button click */ }
+        )
     }
 }
+
+@Composable
+fun TabButton(text: String, onClick: () -> Unit) {
+    OutlinedButton(
+        onClick = onClick,
+        modifier = Modifier
+            .padding(horizontal = 8.dp, vertical = 4.dp), // Adjust padding as needed
+        contentPadding = ButtonDefaults.ContentPadding
+    ) {
+        Text(text = text)
+    }
+}
+
+// Custom shape for rounded tab
+

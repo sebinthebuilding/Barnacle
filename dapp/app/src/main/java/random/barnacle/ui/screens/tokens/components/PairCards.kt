@@ -9,7 +9,6 @@ import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -35,9 +34,7 @@ fun PairCards(token: TokenModel, usdcPrices: Map<String, Double>) {
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 8.dp)
                     .clickable {
-                        navController.navigate(Routes.PAIR_DETAILS) {
-                            popUpTo("p") { inclusive = true }
-                        }
+                        navController.navigate(Routes.PAIR_DETAILS)
                     },
                 shape = RoundedCornerShape(12.dp), // Rounded corners
             ) {
