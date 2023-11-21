@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import random.barnacle.domain.models.TokenModel
 
 @Composable
-fun PairCardContents(token: TokenModel, usdcPrice: Double) {
+fun PairCardContentsAndTokenSwap(token: TokenModel, usdcPrice: Double) {
     Row(
         modifier = Modifier
             .fillMaxWidth()

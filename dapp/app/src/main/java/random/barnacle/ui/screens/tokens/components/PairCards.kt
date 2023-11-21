@@ -39,7 +39,7 @@ fun PairCards(token: TokenModel, usdcPrices: Map<String, Double>) {
                 shape = RoundedCornerShape(12.dp), // Rounded corners
             ) {
                 if (usdcPrice != null) {
-                    PairCardContents(token, usdcPrice)
+                    PairCardContentsAndTokenSwap(token, usdcPrice)
                 }
             }
         }
