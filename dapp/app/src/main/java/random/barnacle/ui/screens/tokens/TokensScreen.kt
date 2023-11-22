@@ -4,7 +4,7 @@ import QuoteCurrencyFilters
 import TokenSearchBox
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -34,7 +34,8 @@ fun TokensScreen(tokensViewModel: TokensViewModel, priceViewModel: PriceViewMode
 
     Box(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
+            .padding(top = 64.dp)
     ) {
         QuoteCurrencyFilters()
         Column(
