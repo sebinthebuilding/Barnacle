@@ -17,7 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import random.barnacle.ui.screens.tokens.components.PairCards
+import random.barnacle.ui.screens.tokens.components.PairCardsAsList
 import random.barnacle.ui.view_models.PriceViewModel
 import random.barnacle.ui.view_models.TokensViewModel
 
@@ -49,7 +49,7 @@ fun TokensScreen(tokensViewModel: TokensViewModel, priceViewModel: PriceViewMode
                     .weight(1f)
             ) {
                 items(filteredTokens) { token ->
-                    PairCards(token = token, usdcPrices)
+                    PairCardsAsList(token = token, usdcPrices)
 
                 }
             }

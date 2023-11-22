@@ -1,6 +1,6 @@
 package random.barnacle.ui.screens.tokens.components
 
-import PairDetails
+import PairDetailsAndComposableTokenSwap
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,7 +16,7 @@ import random.barnacle.domain.models.TokenModel
 import random.barnacle.ui.nav.Routes
 
 @Composable
-fun PairCards(token: TokenModel, usdcPrices: Map<String, Double>) {
+fun PairCardsAsList(token: TokenModel, usdcPrices: Map<String, Double>) {
     val usdcPrice: Double? = usdcPrices[token.address] ?: 0.0
 
     val navController = rememberNavController()
@@ -24,7 +24,7 @@ fun PairCards(token: TokenModel, usdcPrices: Map<String, Double>) {
     NavHost(navController = navController, startDestination = "p") {
         composable(Routes.PAIR_DETAILS) {
             if (usdcPrice != null) {
-                PairDetails(token = token, usdcPrice = usdcPrice )
+                PairDetailsAndComposableTokenSwap(token = token, usdcPrice = usdcPrice )
             }
         }
 
@@ -39,7 +39,7 @@ fun PairCards(token: TokenModel, usdcPrices: Map<String, Double>) {
                 shape = RoundedCornerShape(12.dp), // Rounded corners
             ) {
                 if (usdcPrice != null) {
-                    PairCardContentsAndTokenSwap(token, usdcPrice)
+                    PairCardContents(token, usdcPrice)
                 }
             }
         }

@@ -74,6 +74,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation("androidx.navigation:navigation-compose:2.7.5")
 
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
     implementation("com.solanamobile:mobile-wallet-adapter-clientlib-ktx:1.2.0")
 
