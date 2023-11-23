@@ -52,7 +52,8 @@ fun TokenSearchBox(
                     imageVector = Icons.Default.Search,
                     contentDescription = null,
                     modifier = Modifier
-                        .size(24.dp),
+                        .size(24.dp)
+                        .padding(2.dp),
                     colorFilter = androidx.compose.ui.graphics.ColorFilter.tint(Color.White),
                     alignment = Alignment.CenterEnd
                 )
