@@ -22,79 +22,75 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import random.barnacle.ui.nav.Routes
+import random.barnacle.domain.QuoteCurrencies
+import random.barnacle.domain.models.TokenModel
 import random.barnacle.ui.screens.tokens.components.PairCardContents
 import random.barnacle.ui.view_models.PriceViewModel
 import random.barnacle.ui.view_models.TokensViewModel
 
 @Composable
 fun TokensScreen(tokensViewModel: TokensViewModel, priceViewModel: PriceViewModel) {
-
     val allTokens = tokensViewModel.allTokensUiState
     val usdcPrices by priceViewModel.usdcPriceUiState.collectAsState(initial = emptyMap())
 
     var tokenSearchQuery by remember { mutableStateOf(TextFieldValue()) }
 
+    var selectedPairCard by remember { mutableStateOf<TokenModel?>(null) }
+
+    var selectedQuoteCurrency by remember { mutableStateOf<QuoteCurrencies>(QuoteCurrencies.USDC) }
+
     val filteredTokens = allTokens.filter { token ->
         token.symbol.contains(tokenSearchQuery.text, ignoreCase = true)
     }
-
-    val navController = rememberNavController()
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(top = 64.dp)
     ) {
-        QuoteCurrencyFilters()
         Column(
             modifier = Modifier
                 .padding(
                     top = 64.dp,
                     bottom = 160.dp)
         ) {
-            LazyColumn(
-                modifier = Modifier
-                    .weight(1f)
-            ) {
-                items(filteredTokens) { token ->
-                    val usdcPrice: Double? = usdcPrices[token.address] ?: 0.0
+            if (selectedPairCard != null) {
+                selectedPairCard?.let { token ->
+                    val usdcPrice = usdcPrices[token.address] ?: 0.0
 
-                    NavHost(navController = navController, startDestination = "PairCard") {
-                        composable(Routes.PAIR_DETAILS) {
-                            if (usdcPrice != null) {
-                                PairDetailsAndComposableTokenSwap(token = token, usdcPrice = usdcPrice)
-                            }
-                        }
+                    PairDetailsAndComposableTokenSwap(token = token, usdcPrice = usdcPrice, allTokens = allTokens)
+                }
+            } else {
 
-                        composable("PairCard") {
-                            Card(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 16.dp, vertical = 8.dp)
-                                    .clickable {
-                                        navController.navigate(Routes.PAIR_DETAILS)
-                                    },
-                                shape = RoundedCornerShape(12.dp), // Rounded corners
-                            ) {
-                                if (usdcPrice != null) {
-                                    PairCardContents(token, usdcPrice)
-                                }
-                            }
+                QuoteCurrencyFilters()
+
+                LazyColumn(
+                    modifier = Modifier
+                        .weight(1f)
+                ) {
+                    items(filteredTokens) { token ->
+                        val usdcPrice = usdcPrices[token.address] ?: 0.0
+                        Card(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp, vertical = 8.dp)
+                                .clickable {
+                                    selectedPairCard = token
+                                },
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            PairCardContents(token = token, usdcPrice = usdcPrice)
                         }
                     }
                 }
-            }
 
-            TokenSearchBox(
-                tokenSearchQuery = tokenSearchQuery,
-                onSearchQueryChange = { newQuery ->
-                    tokenSearchQuery = newQuery
-                },
-            )
+                TokenSearchBox(
+                    tokenSearchQuery = tokenSearchQuery,
+                    onSearchQueryChange = { newQuery ->
+                        tokenSearchQuery = newQuery
+                    },
+                )
+            }
         }
     }
 }
