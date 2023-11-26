@@ -20,7 +20,7 @@ import coil.compose.AsyncImage
 import random.barnacle.domain.models.TokenModel
 
 @Composable
-fun PairCardContents(token: TokenModel, usdcPrice: Double) {
+fun PairCardContents(token: TokenModel, price: Double, quoteCurrency: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -47,7 +47,7 @@ fun PairCardContents(token: TokenModel, usdcPrice: Double) {
         Spacer(modifier = Modifier.weight(1f))
 
         Text(
-            text = "$usdcPrice USDC",
+            text = "$price $quoteCurrency",
             style = TextStyle(fontSize = 16.sp),
         )
     }

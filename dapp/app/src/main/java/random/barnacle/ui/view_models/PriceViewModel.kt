@@ -18,19 +18,31 @@ import random.barnacle.domain.use_cases.PriceUseCase
 class PriceViewModel(private val priceRepository: PriceRepository, private val tokensRepository: TokensRepository) : ViewModel() {
 
     val usdcPriceUiState: MutableStateFlow<Map<String, Double>> = MutableStateFlow<Map<String, Double>>(emptyMap())
+    val solPriceUiState: MutableStateFlow<Map<String, Double>> = MutableStateFlow<Map<String, Double>>(emptyMap())
 
     init {
         streamUsdcPriceUiState()
+        streamSolPriceUiState()
     }
 
     private fun streamUsdcPriceUiState() {
         viewModelScope.launch {
             while (true) {
-                val price = PriceUseCase(priceRepository, tokensRepository).getPrice()
+                val price = PriceUseCase(priceRepository, tokensRepository).getUsdcPrice()
                 usdcPriceUiState.emit(price)
             }
         }
     }
+
+    private fun streamSolPriceUiState() {
+        viewModelScope.launch {
+            while (true) {
+                val price = PriceUseCase(priceRepository, tokensRepository).getSolPrice()
+                solPriceUiState.emit(price)
+            }
+        }
+    }
+
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {

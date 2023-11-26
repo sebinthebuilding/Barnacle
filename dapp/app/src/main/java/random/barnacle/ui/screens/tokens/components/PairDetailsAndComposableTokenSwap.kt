@@ -9,10 +9,10 @@ import androidx.compose.ui.unit.dp
 import random.barnacle.domain.models.TokenModel
 
 @Composable
-fun PairDetailsAndComposableTokenSwap(token: TokenModel, usdcPrice: Double, allTokens: List<TokenModel>) {
+fun PairDetailsAndComposableTokenSwap(token: TokenModel, price: Double, allTokens: List<TokenModel>) {
     Box(modifier = Modifier.fillMaxSize()) {
         Text(
-            text = usdcPrice.toString() + " USDC / " + token.symbol,
+            text = price.toString() + " USDC / " + token.symbol,
             modifier = Modifier.padding(16.dp)
         )
     }
