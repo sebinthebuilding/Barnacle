@@ -15,4 +15,7 @@ interface AppApiService {
     @GET("v4/price")
     suspend fun getUsdcPrice(@Query("ids") id: String): PriceResponse
 
+    @GET("v4/price")
+    suspend fun getSolPrice(@Query("ids") id: String, @Query("vsToken") vsToken: String): PriceResponse
+
 }
