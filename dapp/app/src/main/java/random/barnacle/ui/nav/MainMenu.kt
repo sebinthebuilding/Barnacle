@@ -36,13 +36,6 @@ fun NavButtons(navController: NavHostController) {
                 .padding(bottom = 96.dp),
             horizontalArrangement = Arrangement.Center
         ) {
-            Button(
-                onClick = { navController.navigate(Routes.FAVORITES) },
-                modifier = Modifier
-                    .padding(4.dp)
-            ) {
-                Icon(imageVector = Icons.Default.FavoriteBorder, contentDescription = null)
-            }
 
             Button(
                 onClick = { navController.navigate(Routes.TOKENS) },
@@ -51,15 +44,6 @@ fun NavButtons(navController: NavHostController) {
             ) {
                 Text(text = "Tokens")
             }
-
-            Button(
-                onClick = { navController.navigate(Routes.NFTs) },
-                modifier = Modifier
-                    .padding(4.dp)
-            ) {
-                Text(text = "NFTs")
-            }
-
         }
 
         Row(
@@ -68,13 +52,6 @@ fun NavButtons(navController: NavHostController) {
                 .padding(bottom = 32.dp),
             horizontalArrangement = Arrangement.Center
         ) {
-            Button(
-                onClick = { navController.navigate(Routes.EARN) },
-                modifier = Modifier
-                    .padding(4.dp)
-            ) {
-                Text(text = "Earn")
-            }
 
             Button(
                 onClick = { navController.navigate(Routes.HOLDINGS) },

@@ -18,8 +18,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import random.barnacle.domain.QuoteCurrencies
-import random.barnacle.domain.models.TokenModel
 import random.barnacle.ui.screens.tokens.components.PairsList
 import random.barnacle.ui.view_models.PriceViewModel
 import random.barnacle.ui.view_models.TokensViewModel
@@ -31,8 +31,6 @@ fun TokensScreen(tokensViewModel: TokensViewModel, priceViewModel: PriceViewMode
     val solPrices by priceViewModel.solPriceUiState.collectAsState(initial = emptyMap())
 
     var tokenSearchQuery by remember { mutableStateOf(TextFieldValue()) }
-
-    var selectedPairCard by remember { mutableStateOf<TokenModel?>(null) }
 
     var selectedQuoteCurrency by remember { mutableStateOf<QuoteCurrencies>(QuoteCurrencies.USDC) }
 
@@ -68,19 +66,23 @@ fun TokensScreen(tokensViewModel: TokensViewModel, priceViewModel: PriceViewMode
                     tokenSearchQuery = newQuery
                 },
             )
-        }
-        Column(
-            modifier = Modifier
-                .padding(
-                    bottom = 256.dp,
-                    top = 128.dp
-                )
-        ) {
-            if (selectedQuoteCurrency == QuoteCurrencies.USDC) {
-                PairsList(filteredTokens, allTokens, usdcPrices, "USDC")
-            } else if (selectedQuoteCurrency == QuoteCurrencies.SOL) {
-                PairsList(filteredTokens, allTokens, solPrices, "SOL")
-            }
+
+
+
+                    Column(
+                        modifier = Modifier
+                            .padding(
+                                bottom = 256.dp,
+                                top = 128.dp
+                            )
+                    ) {
+                        if (selectedQuoteCurrency == QuoteCurrencies.USDC) {
+                            PairsList(filteredTokens, allTokens, usdcPrices, "USDC")
+                        } else if (selectedQuoteCurrency == QuoteCurrencies.SOL) {
+                            PairsList(filteredTokens, allTokens, solPrices, "SOL")
+                        }
+                    }
+
         }
     }
 }
