@@ -26,7 +26,9 @@ class MainActivity : ComponentActivity() {
             BarnacleTheme(darkTheme = true) {
                 Scaffold(
                     topBar = {
-                        AppBar(title = "Welcome [USER SOL ADDRESS]")
+                        AppBar(
+                            title = "Welcome [USER SOL ADDRESS]"
+                        )
                     },
                     content = {
                         Surface(

@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,9 +17,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.rememberNavController
 import random.barnacle.domain.QuoteCurrencies
-import random.barnacle.ui.screens.tokens.components.PairsList
+import random.barnacle.ui.screens.tokens.components.PairCardsList
 import random.barnacle.ui.view_models.PriceViewModel
 import random.barnacle.ui.view_models.TokensViewModel
 
@@ -46,9 +44,6 @@ fun TokensScreen(tokensViewModel: TokensViewModel, priceViewModel: PriceViewMode
         Column {
             Row {
                 OutlinedButton(
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp, vertical = 4.dp), // Adjust padding as needed
-                    contentPadding = ButtonDefaults.ContentPadding,
                     onClick = { selectedQuoteCurrency = QuoteCurrencies.USDC }
                 ) {
                     Text(text = "USDC")
@@ -67,21 +62,16 @@ fun TokensScreen(tokensViewModel: TokensViewModel, priceViewModel: PriceViewMode
                 },
             )
 
-
-
-                    Column(
-                        modifier = Modifier
-                            .padding(
-                                bottom = 256.dp,
-                                top = 128.dp
-                            )
-                    ) {
-                        if (selectedQuoteCurrency == QuoteCurrencies.USDC) {
-                            PairsList(filteredTokens, allTokens, usdcPrices, "USDC")
-                        } else if (selectedQuoteCurrency == QuoteCurrencies.SOL) {
-                            PairsList(filteredTokens, allTokens, solPrices, "SOL")
-                        }
-                    }
+            Column(
+                modifier = Modifier
+                    .padding(bottom = 192.dp),-
+            ) {
+                if (selectedQuoteCurrency == QuoteCurrencies.USDC) {
+                    PairCardsList(filteredTokens, allTokens, usdcPrices, "USDC")
+                } else if (selectedQuoteCurrency == QuoteCurrencies.SOL) {
+                    PairCardsList(filteredTokens, allTokens, solPrices, "SOL")
+                }
+            }
 
         }
     }

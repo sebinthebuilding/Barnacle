@@ -20,9 +20,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import random.barnacle.domain.models.TokenModel
+import random.barnacle.ui.nav.Routes
 
 @Composable
-fun PairsList(
+fun PairCardsList(
     allTokens: List<TokenModel>,
     filteredTokens: List<TokenModel>,
     prices: Map<String, Double>,
@@ -34,9 +35,9 @@ fun PairsList(
 
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "List of Pair Cards") {
+    NavHost(navController = navController, startDestination = Routes.PAIR_CARDS_LIST) {
 
-        composable("List of Pair Cards") {
+        composable(Routes.PAIR_CARDS_LIST) {
             LazyColumn {
                 items(filteredTokens) { token ->
                     price = prices[token.address] ?: 0.0
@@ -46,7 +47,7 @@ fun PairsList(
                             .padding(horizontal = 16.dp, vertical = 8.dp)
                             .clickable {
                                 selectedPairCard = token
-                                navController.navigate("Pair Details")
+                                navController.navigate(Routes.PAIR_DETAILS)
                             },
                         shape = RoundedCornerShape(12.dp)
                     ) {
@@ -56,7 +57,7 @@ fun PairsList(
             }
         }
 
-        composable("Pair Details") {
+        composable(Routes.PAIR_DETAILS) {
             selectedPairCard?.let { token -> PairDetailsAndComposableTokenSwap(token = token, price = price, allTokens = allTokens) }
         }
 
