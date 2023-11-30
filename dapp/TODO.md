@@ -1,0 +1,1 @@
+make PriceUseCase more efficient
