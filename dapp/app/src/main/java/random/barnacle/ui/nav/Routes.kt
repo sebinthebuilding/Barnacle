@@ -1,13 +1,10 @@
 package random.barnacle.ui.nav
 
 object Routes {
-    const val FAVORITES = "/FAVORITES"
-    const val TOKENS = "/TOKENS"
-    const val NFTs = "/NFTs"
-    const val EARN = "/EARN"
-    const val HOLDINGS = "/HOLDINGS"
-    const val ANALYTICS = "/ANALYTICS"
+    const val WALLET = "/Wallet"
+    const val TOKENS = "/Tokens"
+    const val ANALYTICS = "/Analytics"
 
-    const val PAIR_CARDS = "/TOKENS/PAIR_CARDS"
-    const val PAIR_DETAILS = "/TOKENS/PAIR_CARDS/PAIR_DETAILS"
+    const val PAIR_CARDS_LIST = "$TOKENS/PairCardsList"
+    const val PAIR_DETAILS = "$PAIR_CARDS_LIST/PairDetails"
 }
