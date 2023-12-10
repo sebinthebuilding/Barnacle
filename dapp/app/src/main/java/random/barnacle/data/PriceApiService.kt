@@ -8,19 +8,15 @@ import retrofit2.http.Query
 interface PriceApiService {
 
     @GET("v4/price")
-    suspend fun getUsdcPrice(
-        @Query("ids") id: String = testingStrings.strings,
+    suspend fun getPriceInUsdc(
+        @Query("ids") id: String,
         @Query("vsToken") vsToken: String = QuoteCurrencies.USDC.address
     ): PriceResponse
 
     @GET("v4/price")
-    suspend fun getSolPrice(
-        @Query("ids") id: String = testingStrings.strings,
+    suspend fun getPriceInSol(
+        @Query("ids") id: String = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v,So11111111111111111111111111111111111111112",
         @Query("vsToken") vsToken: String = QuoteCurrencies.SOL.address
     ): PriceResponse
 }
 
-object testingStrings {
-    val strings = listOf(QuoteCurrencies.USDC.address, QuoteCurrencies.SOL.address)
-        .joinToString(",")
-}

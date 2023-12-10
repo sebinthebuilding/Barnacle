@@ -15,7 +15,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
 import random.barnacle.domain.QuoteCurrencies
 import random.barnacle.ui.screens.tokens.components.PairCardsListWithTokenSearch
 import random.barnacle.ui.view_models.PriceViewModel
@@ -27,7 +26,7 @@ fun TokensScreen(
     priceViewModel: PriceViewModel
 ) {
     val allTokens = tokensViewModel.allTokensUiState
-    val prices by priceViewModel.ANYPriceUiState.collectAsState(initial = emptyMap())
+    val prices by priceViewModel.solPriceUiState.collectAsState(initial = emptyMap())
 
     var selectedQuoteCurrency by remember { mutableStateOf<QuoteCurrencies>(QuoteCurrencies.USDC) }
 
@@ -54,7 +53,7 @@ fun TokensScreen(
                 modifier = Modifier
                     .padding(bottom = 192.dp),
             ) {
-                PairCardsListWithTokenSearch(allTokens, prices, QuoteCurrencies.USDC.name)
+                PairCardsListWithTokenSearch(allTokens, prices, QuoteCurrencies.SOL.name)
             }
 
         }
