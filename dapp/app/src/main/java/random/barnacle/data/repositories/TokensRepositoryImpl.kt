@@ -10,7 +10,7 @@ import javax.inject.Singleton
 class TokensRepositoryImpl @Inject constructor(
     private val tokenClient: TokenApiService
 ) : TokensRepository {
-    override suspend fun getAllTokens(): List<TokenResponse> {
-        return tokenClient.getAllTokens()
+    override suspend fun fetchAllTokens(): List<TokenResponse> {
+        return tokenClient.fetchAllTokens()
     }
 }

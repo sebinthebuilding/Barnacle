@@ -69,7 +69,12 @@ fun PairCardsListWithTokenSearch(
         }
         composable(Routes.PAIR_DETAILS) {
             baseCurrencyOfSelectedPairCard?.let { token ->
-                PairDetailsAndComposableTokenSwap(token = token, allTokens = allTokens)
+                PairDetailsAndComposableTokenSwap(
+                    prices = prices,
+                    token = token,
+                    quoteCurrency = quoteCurrency,
+                    allTokens = allTokens
+                )
             }
         }
 

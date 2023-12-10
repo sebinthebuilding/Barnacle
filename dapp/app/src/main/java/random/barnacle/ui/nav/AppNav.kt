@@ -18,8 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -29,7 +27,7 @@ import random.barnacle.ui.nav.Routes
 import random.barnacle.ui.screens.analytics.AnalyticsScreen
 import random.barnacle.ui.screens.tokens.TokensScreen
 import random.barnacle.ui.screens.wallet.WalletScreen
-import random.barnacle.ui.view_models.PriceViewModel
+import random.barnacle.ui.view_models.PricesViewModel
 import random.barnacle.ui.view_models.TokensViewModel
 
 @Composable
@@ -39,11 +37,11 @@ fun AppNav() {
     MainMenu(navController = navController)
 
     val tokensViewModel: TokensViewModel = hiltViewModel()
-    val priceViewModel: PriceViewModel = viewModel()
+    val pricesViewModel: PricesViewModel = hiltViewModel()
 
     NavHost(navController = navController, startDestination = Routes.WALLET) {
         composable(Routes.TOKENS) {
-            TokensScreen(tokensViewModel, priceViewModel)
+            TokensScreen(tokensViewModel, pricesViewModel)
         }
 
         composable(Routes.WALLET) {
