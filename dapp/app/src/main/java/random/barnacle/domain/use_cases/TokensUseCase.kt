@@ -1,16 +1,21 @@
 package random.barnacle.domain.use_cases
 
+import android.util.Log
 import random.barnacle.data.models.mapToModel
-import random.barnacle.data.repositories.TokensRepository
 import random.barnacle.domain.models.TokenModel
+import random.barnacle.domain.repositories.TokensRepository
+import javax.inject.Inject
 
-class TokensUseCase(private val tokensRepository: TokensRepository) {
-
+class TokensUseCase @Inject constructor(
+    private val tokensRepository: TokensRepository
+) {
     suspend fun getAllTokensUseCase(): List<TokenModel> {
-        return tokensRepository.getAllTokens().map { it.mapToModel() }
-    }
+        val tokens = tokensRepository.fetchAllTokens().map { it.mapToModel() }
 
-    suspend fun getStrictTokensUseCase(): List<TokenModel> {
-        return tokensRepository.getStrictTokens().map { it.mapToModel() }
+        val tokenAddresses = tokens.joinToString(",") { it.address }
+
+        Log.d("ADDRESSES", tokenAddresses)
+
+        return tokens
     }
 }

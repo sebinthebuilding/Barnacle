@@ -1,64 +1,59 @@
 package random.barnacle.domain.use_cases
 
 import android.util.Log
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
-import random.barnacle.data.repositories.PriceRepository
-import random.barnacle.data.repositories.TokensRepository
+import random.barnacle.domain.repositories.PriceRepository
+import javax.inject.Inject
 
-class PriceUseCase(private val priceRepository: PriceRepository, private val tokensRepository: TokensRepository) {
 
-    suspend fun getUsdcPrice(): Map<String, Double> = coroutineScope {
-        val tokens = TokensUseCase(tokensRepository).getAllTokensUseCase()
+class PriceUseCase @Inject constructor(
+    private val priceRepository: PriceRepository,
+) {
+    suspend fun gimmePricesInSol(): Map<String, Double> {
         val tokenPriceMap = mutableMapOf<String, Double>()
 
-        val priceDeferredList: List<Deferred<Double>> = tokens.map { token ->
-            async {
-                val prices = priceRepository.getUsdcPrice(token.address)
-                val price = prices.data[token.address]?.price ?: 0.0
-                Log.d("PRICES_BOI", prices.toString())
-                price
+        val pricesResponse = priceRepository.fetchPricesInSol().data
+
+        Log.d("PRICE_RESPONSES", pricesResponse.toString())
+
+        val keys = pricesResponse.keys
+
+        val values = pricesResponse.values
+
+        Log.d("PRICE_KEYS", keys.toString())
+        Log.d("PRICE_VALUES", values.toString())
+
+        for (value in values) {
+            if (keys.contains(value.id)) {
+                tokenPriceMap[value.id] = value.price
             }
         }
 
-        val pricesList: List<Double> = priceDeferredList.awaitAll()
+        Log.d("TOKEN_PRICE_MAP_IN_SOL", tokenPriceMap.toString())
 
-        tokens.forEachIndexed { index, token ->
-            pricesList[index].let { price ->
-                tokenPriceMap[token.address] = price
-            }
-        }
-
-                Log.d("MAP_BOODGE", tokenPriceMap.toString())
-
-        return@coroutineScope tokenPriceMap
+        return tokenPriceMap
     }
-
-    suspend fun getSolPrice(): Map<String, Double> = coroutineScope {
-        val tokens = TokensUseCase(tokensRepository).getAllTokensUseCase()
+    suspend fun gimmePricesInUsdc(): Map<String, Double> {
         val tokenPriceMap = mutableMapOf<String, Double>()
 
-        val priceDeferredList: List<Deferred<Double>> = tokens.map { token ->
-            async {
-                val prices = priceRepository.getSolPrice(token.address)
-                val price = prices.data[token.address]?.price ?: 0.0
-                Log.d("SOL_PRICES_BOI", prices.toString())
-                price
+        val pricesResponse = priceRepository.fetchPricesInUsdc().data
+
+        Log.d("PRICE_RESPONSES", pricesResponse.toString())
+
+        val keys = pricesResponse.keys
+
+        val values = pricesResponse.values
+
+        Log.d("PRICE_KEYS", keys.toString())
+        Log.d("PRICE_VALUES", values.toString())
+
+        for (value in values) {
+            if (keys.contains(value.id)) {
+                tokenPriceMap[value.id] = value.price
             }
         }
 
-        val pricesList: List<Double> = priceDeferredList.awaitAll()
+        Log.d("TOKEN_PRICE_MAP_IN_SOL", tokenPriceMap.toString())
 
-        tokens.forEachIndexed { index, token ->
-            pricesList[index].let { price ->
-                tokenPriceMap[token.address] = price
-            }
-        }
-
-        Log.d("SOL_MAP_BOODGE", tokenPriceMap.toString())
-
-        return@coroutineScope tokenPriceMap
+        return tokenPriceMap
     }
 }

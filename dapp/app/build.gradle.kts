@@ -65,7 +65,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation ("androidx.hilt:hilt-navigation-compose:1.1.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-    implementation("io.ktor:ktor-client-core:2.3.4")
+    implementation("io.ktor:ktor-client-core:2.3.6")
     implementation("io.ktor:ktor-client-android:2.3.4")
     implementation("io.github.funkatronics:multimult:0.2.0")
     implementation("io.github.funkatronics:rpccore:0.2.1")
@@ -79,7 +79,7 @@ dependencies {
     implementation("com.solanamobile:mobile-wallet-adapter-clientlib-ktx:1.2.0")
 
     implementation("com.google.dagger:hilt-android:2.48.1")
-    kapt("com.google.dagger:hilt-compiler:2.48")
+    kapt("com.google.dagger:hilt-compiler:2.48.1")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

@@ -17,14 +17,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import random.barnacle.domain.QuoteCurrencies
 import random.barnacle.ui.screens.tokens.components.PairCardsListWithTokenSearch
-import random.barnacle.ui.view_models.PriceViewModel
+import random.barnacle.ui.view_models.PricesViewModel
 import random.barnacle.ui.view_models.TokensViewModel
 
 @Composable
-fun TokensScreen(tokensViewModel: TokensViewModel, priceViewModel: PriceViewModel) {
+fun TokensScreen(
+    tokensViewModel: TokensViewModel,
+    pricesViewModel: PricesViewModel
+) {
     val allTokens = tokensViewModel.allTokensUiState
-    val usdcPrices by priceViewModel.usdcPriceUiState.collectAsState(initial = emptyMap())
-    val solPrices by priceViewModel.solPriceUiState.collectAsState(initial = emptyMap())
+    val pricesInSol by pricesViewModel.solPriceUiState.collectAsState(initial = emptyMap())
+    val pricesInUsdc by pricesViewModel.usdcPriceUiState.collectAsState(initial = emptyMap())
+
 
     var selectedQuoteCurrency by remember { mutableStateOf<QuoteCurrencies>(QuoteCurrencies.USDC) }
 
@@ -52,9 +56,10 @@ fun TokensScreen(tokensViewModel: TokensViewModel, priceViewModel: PriceViewMode
                     .padding(bottom = 192.dp),
             ) {
                 if (selectedQuoteCurrency == QuoteCurrencies.USDC) {
-                    PairCardsListWithTokenSearch(allTokens, usdcPrices, "USDC")
-                } else if (selectedQuoteCurrency == QuoteCurrencies.SOL) {
-                    PairCardsListWithTokenSearch(allTokens, solPrices, "SOL")
+                    PairCardsListWithTokenSearch(allTokens, pricesInUsdc, QuoteCurrencies.USDC.name)
+                }
+                if (selectedQuoteCurrency == QuoteCurrencies.SOL) {
+                    PairCardsListWithTokenSearch(allTokens, pricesInSol, QuoteCurrencies.SOL.name)
                 }
             }
 
@@ -63,15 +68,3 @@ fun TokensScreen(tokensViewModel: TokensViewModel, priceViewModel: PriceViewMode
 
 
 }
-
-/*
-    if (selectedPairCard != null) {
-        selectedPairCard?.let { token ->
-            val price = prices[token.address] ?: 0.0
-
-            PairDetailsAndComposableTokenSwap(token = token, price = price, allTokens = allTokens)
-        }
-    } else {
-
-    }
- */
