@@ -17,6 +17,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -36,8 +38,8 @@ fun AppNav() {
 
     MainMenu(navController = navController)
 
-    val tokensViewModel: TokensViewModel = viewModel(factory = TokensViewModel.Factory)
-    val priceViewModel: PriceViewModel = viewModel(factory = PriceViewModel.Factory)
+    val tokensViewModel: TokensViewModel = hiltViewModel()
+    val priceViewModel: PriceViewModel = viewModel()
 
     NavHost(navController = navController, startDestination = Routes.WALLET) {
         composable(Routes.TOKENS) {

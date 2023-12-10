@@ -15,16 +15,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
 import random.barnacle.domain.QuoteCurrencies
 import random.barnacle.ui.screens.tokens.components.PairCardsListWithTokenSearch
 import random.barnacle.ui.view_models.PriceViewModel
 import random.barnacle.ui.view_models.TokensViewModel
 
 @Composable
-fun TokensScreen(tokensViewModel: TokensViewModel, priceViewModel: PriceViewModel) {
+fun TokensScreen(
+    tokensViewModel: TokensViewModel,
+    priceViewModel: PriceViewModel
+) {
     val allTokens = tokensViewModel.allTokensUiState
-    val usdcPrices by priceViewModel.usdcPriceUiState.collectAsState(initial = emptyMap())
-    val solPrices by priceViewModel.solPriceUiState.collectAsState(initial = emptyMap())
+    val prices by priceViewModel.ANYPriceUiState.collectAsState(initial = emptyMap())
 
     var selectedQuoteCurrency by remember { mutableStateOf<QuoteCurrencies>(QuoteCurrencies.USDC) }
 
@@ -51,11 +54,7 @@ fun TokensScreen(tokensViewModel: TokensViewModel, priceViewModel: PriceViewMode
                 modifier = Modifier
                     .padding(bottom = 192.dp),
             ) {
-                if (selectedQuoteCurrency == QuoteCurrencies.USDC) {
-                    PairCardsListWithTokenSearch(allTokens, usdcPrices, "USDC")
-                } else if (selectedQuoteCurrency == QuoteCurrencies.SOL) {
-                    PairCardsListWithTokenSearch(allTokens, solPrices, "SOL")
-                }
+                PairCardsListWithTokenSearch(allTokens, prices, QuoteCurrencies.USDC.name)
             }
 
         }

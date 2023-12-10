@@ -5,60 +5,35 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
-import random.barnacle.data.repositories.PriceRepository
-import random.barnacle.data.repositories.TokensRepository
+import random.barnacle.data.models.PriceData
+import random.barnacle.domain.QuoteCurrencies
+import random.barnacle.domain.repositories.PriceRepository
+import random.barnacle.domain.repositories.TokensRepository
+import javax.inject.Inject
 
-class PriceUseCase(private val priceRepository: PriceRepository, private val tokensRepository: TokensRepository) {
 
-    suspend fun getUsdcPrice(): Map<String, Double> = coroutineScope {
-        val tokens = TokensUseCase(tokensRepository).getAllTokensUseCase()
+class PriceUseCase @Inject constructor(
+    private val priceRepository: PriceRepository,
+    private val tokensRepository: TokensRepository
+) {
+    suspend fun getANYPrice(): Map<String, Double> {
+
+        val response = priceRepository.getANYPrice().data.entries
+        Log.d("PRICE_RESPONSE", response.toString())
+
         val tokenPriceMap = mutableMapOf<String, Double>()
 
-        val priceDeferredList: List<Deferred<Double>> = tokens.map { token ->
-            async {
-                val prices = priceRepository.getUsdcPrice(token.address)
-                val price = prices.data[token.address]?.price ?: 0.0
-                Log.d("PRICES_BOI", prices.toString())
-                price
-            }
-        }
+        val usdc_price = priceRepository.getANYPrice().data[QuoteCurrencies.USDC.address]?.price ?: 0.0
 
-        val pricesList: List<Double> = priceDeferredList.awaitAll()
+        Log.d("USDC_PRICE_IN_SOL", usdc_price.toString())
 
-        tokens.forEachIndexed { index, token ->
-            pricesList[index].let { price ->
-                tokenPriceMap[token.address] = price
-            }
-        }
+        tokenPriceMap[QuoteCurrencies.USDC.address] = usdc_price
 
-                Log.d("MAP_BOODGE", tokenPriceMap.toString())
+        val sol_price = priceRepository.getANYPrice().data[QuoteCurrencies.SOL.address]?.price ?: 0.0
 
-        return@coroutineScope tokenPriceMap
-    }
+        Log.d("SOL_PRICE_IN_SOL", sol_price.toString())
 
-    suspend fun getSolPrice(): Map<String, Double> = coroutineScope {
-        val tokens = TokensUseCase(tokensRepository).getAllTokensUseCase()
-        val tokenPriceMap = mutableMapOf<String, Double>()
 
-        val priceDeferredList: List<Deferred<Double>> = tokens.map { token ->
-            async {
-                val prices = priceRepository.getSolPrice(token.address)
-                val price = prices.data[token.address]?.price ?: 0.0
-                Log.d("SOL_PRICES_BOI", prices.toString())
-                price
-            }
-        }
-
-        val pricesList: List<Double> = priceDeferredList.awaitAll()
-
-        tokens.forEachIndexed { index, token ->
-            pricesList[index].let { price ->
-                tokenPriceMap[token.address] = price
-            }
-        }
-
-        Log.d("SOL_MAP_BOODGE", tokenPriceMap.toString())
-
-        return@coroutineScope tokenPriceMap
+        return tokenPriceMap
     }
 }
