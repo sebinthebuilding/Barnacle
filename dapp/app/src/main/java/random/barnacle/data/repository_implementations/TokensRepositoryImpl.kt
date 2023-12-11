@@ -1,4 +1,4 @@
-package random.barnacle.data.repositories
+package random.barnacle.data.repository_implementations
 
 import random.barnacle.data.TokenApiService
 import random.barnacle.data.models.TokenResponse
@@ -11,6 +11,6 @@ class TokensRepositoryImpl @Inject constructor(
     private val tokenClient: TokenApiService
 ) : TokensRepository {
     override suspend fun fetchAllTokens(): List<TokenResponse> {
-        return tokenClient.fetchAllTokens()
+        return tokenClient.getAllTokens()
     }
 }

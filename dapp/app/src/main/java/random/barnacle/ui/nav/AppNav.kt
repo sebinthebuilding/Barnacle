@@ -25,7 +25,6 @@ import androidx.navigation.compose.rememberNavController
 import random.barnacle.R
 import random.barnacle.ui.nav.Routes
 import random.barnacle.ui.screens.analytics.AnalyticsScreen
-import random.barnacle.ui.screens.tokens.TokensScreen
 import random.barnacle.ui.screens.wallet.WalletScreen
 import random.barnacle.ui.view_models.PricesViewModel
 import random.barnacle.ui.view_models.TokensViewModel
@@ -41,7 +40,10 @@ fun AppNav() {
 
     NavHost(navController = navController, startDestination = Routes.WALLET) {
         composable(Routes.TOKENS) {
-            TokensScreen(tokensViewModel, pricesViewModel)
+            TokensScreen(
+                tokensViewModel,
+                pricesViewModel
+            )
         }
 
         composable(Routes.WALLET) {
