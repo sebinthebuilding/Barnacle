@@ -8,34 +8,11 @@ import javax.inject.Inject
 class PriceUseCase @Inject constructor(
     private val priceRepository: PriceRepository,
 ) {
-    suspend fun gimmePricesInSol(): Map<String, Double> {
+
+    suspend fun gimmeAllPrices(selectedQuoteCurrencyAddress: String): Map<String, Double> {
         val tokenPriceMap = mutableMapOf<String, Double>()
 
-        val pricesResponse = priceRepository.fetchPricesInSol().data
-
-        Log.d("PRICE_RESPONSES", pricesResponse.toString())
-
-        val keys = pricesResponse.keys
-
-        val values = pricesResponse.values
-
-        Log.d("PRICE_KEYS", keys.toString())
-        Log.d("PRICE_VALUES", values.toString())
-
-        for (value in values) {
-            if (keys.contains(value.id)) {
-                tokenPriceMap[value.id] = value.price
-            }
-        }
-
-        Log.d("TOKEN_PRICE_MAP_IN_SOL", tokenPriceMap.toString())
-
-        return tokenPriceMap
-    }
-    suspend fun gimmePricesInUsdc(): Map<String, Double> {
-        val tokenPriceMap = mutableMapOf<String, Double>()
-
-        val pricesResponse = priceRepository.fetchPricesInUsdc().data
+        val pricesResponse = priceRepository.fetchAllPrices(selectedQuoteCurrencyAddress).data
 
         Log.d("PRICE_RESPONSES", pricesResponse.toString())
 
