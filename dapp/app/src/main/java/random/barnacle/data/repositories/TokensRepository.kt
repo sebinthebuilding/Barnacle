@@ -15,6 +15,17 @@ class TokensRepositoryImpl @Inject constructor(
     private val tokenClient: TokenApiService
 ) : TokensRepository {
     override suspend fun gimmeAllTokens(): List<TokenModel> {
-        return tokenClient.getAllTokens().map { it.mapToModel() }
+        val response = tokenClient.getAllTokens()
+        if (response.isSuccessful) {
+            val responseBody = response.body()
+            if (responseBody != null) {
+                return responseBody.map { it.mapToModel() }
+            } else {
+                throw IllegalStateException("Failed to fetch tokens: ${response.code()}")
+            }
+        } else {
+            throw IllegalStateException("Failed to fetch tokens: ${response.code()}")
+        }
     }
 }
+
