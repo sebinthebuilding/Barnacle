@@ -1,5 +1,6 @@
 package random.barnacle
 
+import AppNav
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -15,7 +16,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
-import random.barnacle.ui.AppUi
 import random.barnacle.ui.theme.BarnacleTheme
 
 @AndroidEntryPoint
@@ -27,11 +27,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             BarnacleTheme(darkTheme = true) {
                 Scaffold(
-                    topBar = {
-                        AppBar(
-                            title = "Welcome [USER SOL ADDRESS]"
-                        )
-                    },
                     content = {
                         Surface(
                             modifier = Modifier
@@ -39,22 +34,12 @@ class MainActivity : ComponentActivity() {
                                 .statusBarsPadding(),
                             color = MaterialTheme.colorScheme.background
                         ) {
-                            AppUi()
+                            AppNav()
                         }
                     }
                 )
             }
         }
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun AppBar(title: String) {
-    TopAppBar(
-        title = {
-            Text(text = title)
-        },
-    )
 }
 

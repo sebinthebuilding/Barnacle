@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -14,17 +13,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import random.barnacle.domain.QuoteCurrencies
 import random.barnacle.ui.screens.tokens.components.PairCards
-import random.barnacle.ui.view_models.PricesViewModel
-import random.barnacle.ui.view_models.TokensViewModel
+import random.barnacle.ui.AppViewModel
 
 @Composable
 fun TokensScreen(
-    tokensViewModel: TokensViewModel,
-    pricesViewModel: PricesViewModel,
+    appViewModel: AppViewModel,
 ) {
-    val allTokens = tokensViewModel.allTokensUiState
-    val allPrices by pricesViewModel.allPricesUiState.collectAsState(initial = emptyMap())
-    val selectedCurrency = pricesViewModel.selectedQuoteCurrency
+    val allTokens = appViewModel.allTokensUiState
+    val allPrices by appViewModel.allPricesUiState.collectAsState(initial = emptyMap())
+    val selectedCurrency = appViewModel.selectedQuoteCurrency
 
     Column(
         modifier = Modifier
@@ -49,23 +46,23 @@ fun TokensScreen(
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             ButtonItem(QuoteCurrencies.USDC.name) {
-                pricesViewModel.stopPriceStream()
-                pricesViewModel.selectQuoteCurrency(QuoteCurrencies.USDC)
+                appViewModel.stopPriceStream()
+                appViewModel.selectQuoteCurrency(QuoteCurrencies.USDC)
             }
             Text(text = "|")
             ButtonItem(QuoteCurrencies.SOL.name) {
-                pricesViewModel.stopPriceStream()
-                pricesViewModel.selectQuoteCurrency(QuoteCurrencies.SOL)
+                appViewModel.stopPriceStream()
+                appViewModel.selectQuoteCurrency(QuoteCurrencies.SOL)
             }
             Text(text = "|")
             ButtonItem(QuoteCurrencies.WBTC.name) {
-                pricesViewModel.stopPriceStream()
-                pricesViewModel.selectQuoteCurrency(QuoteCurrencies.WBTC)
+                appViewModel.stopPriceStream()
+                appViewModel.selectQuoteCurrency(QuoteCurrencies.WBTC)
             }
             Text(text = "|")
             ButtonItem(QuoteCurrencies.WETH.name) {
-                pricesViewModel.stopPriceStream()
-                pricesViewModel.selectQuoteCurrency(QuoteCurrencies.WETH)
+                appViewModel.stopPriceStream()
+                appViewModel.selectQuoteCurrency(QuoteCurrencies.WETH)
             }
         }
     }

@@ -26,8 +26,7 @@ import random.barnacle.R
 import random.barnacle.ui.nav.Routes
 import random.barnacle.ui.screens.analytics.AnalyticsScreen
 import random.barnacle.ui.screens.wallet.WalletScreen
-import random.barnacle.ui.view_models.PricesViewModel
-import random.barnacle.ui.view_models.TokensViewModel
+import random.barnacle.ui.AppViewModel
 
 @Composable
 fun AppNav() {
@@ -35,14 +34,12 @@ fun AppNav() {
 
     MainMenu(navController = navController)
 
-    val tokensViewModel: TokensViewModel = hiltViewModel()
-    val pricesViewModel: PricesViewModel = hiltViewModel()
+    val appViewModel: AppViewModel = hiltViewModel()
 
     NavHost(navController = navController, startDestination = Routes.WALLET) {
         composable(Routes.TOKENS) {
             TokensScreen(
-                tokensViewModel,
-                pricesViewModel
+                appViewModel,
             )
         }
 

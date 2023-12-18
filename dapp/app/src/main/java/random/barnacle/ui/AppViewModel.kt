@@ -1,4 +1,4 @@
-package random.barnacle.ui.view_models
+package random.barnacle.ui
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -9,45 +9,46 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import random.barnacle.data.repositories.PriceRepository
+import random.barnacle.data.repositories.TokensRepository
 import random.barnacle.domain.QuoteCurrencies
-import random.barnacle.domain.repositories.PriceRepository
-import random.barnacle.domain.use_cases.PriceUseCase
+import random.barnacle.domain.models.TokenModel
 import javax.inject.Inject
 
-
 @HiltViewModel
-class PricesViewModel @Inject constructor(
-    private val priceRepository: PriceRepository,
-) : ViewModel() {
+class AppViewModel @Inject constructor(
+    private val tokensRepository: TokensRepository,
+    private val priceRepository: PriceRepository
+): ViewModel() {
+    var allTokensUiState: List<TokenModel> = emptyList()
 
     val allPricesUiState: MutableStateFlow<Map<String, Double>> = MutableStateFlow<Map<String, Double>>(emptyMap())
-
     var selectedQuoteCurrency by mutableStateOf(QuoteCurrencies.USDC)
         private set
 
-    init {
-        streamPrices(selectedQuoteCurrency.address)
-    }
-
     fun selectQuoteCurrency(quoteCurrency: QuoteCurrencies) {
         selectedQuoteCurrency = quoteCurrency
-        streamPrices(quoteCurrency.address)
     }
 
-    private fun streamPrices(selectedQuoteCurrencyAddress: String) {
-        viewModelScope.launch {
-            while (true) {
-                val allPrices = PriceUseCase(
-                    priceRepository,
-                ).gimmeAllPrices(selectedQuoteCurrencyAddress)
+    init {
+        getUiState()
+    }
 
-                allPricesUiState.emit(allPrices)
-            }
+    private fun getUiState() {
+        viewModelScope.launch {
+            allTokensUiState = tokensRepository.gimmeAllTokens()
+            val allAddresses = allTokensUiState.joinToString(",") { it.address }
+
+            priceStream(allAddresses)
         }
+    }
+
+    private suspend fun priceStream(allAddresses: String) {
+        val allPrices = priceRepository.gimmeAllPrices(allAddresses, selectedQuoteCurrency.address)
+        allPricesUiState.emit(allPrices)
     }
 
     fun stopPriceStream() {
         viewModelScope.coroutineContext.cancelChildren()
     }
-
 }
