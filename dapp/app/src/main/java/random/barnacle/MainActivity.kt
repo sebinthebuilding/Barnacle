@@ -1,6 +1,6 @@
 package random.barnacle
 
-import AppNav
+import MainScreen
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,9 +11,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import random.barnacle.ui.theme.BarnacleTheme
@@ -34,7 +31,7 @@ class MainActivity : ComponentActivity() {
                                 .statusBarsPadding(),
                             color = MaterialTheme.colorScheme.background
                         ) {
-                            AppNav()
+                            MainScreen()
                         }
                     }
                 )

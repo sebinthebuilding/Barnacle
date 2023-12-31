@@ -12,11 +12,12 @@ import androidx.navigation.NavHostController
 @Composable
 fun WalletScreen(
     navController: NavHostController,
+    fakeState: String
 ) {
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
         MainMenu(navController = navController)
-        Text(text = "wallet")
+        Text(text = fakeState)
     }
 }

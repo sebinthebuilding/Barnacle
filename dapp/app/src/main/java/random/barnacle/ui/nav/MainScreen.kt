@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -22,6 +24,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
 import random.barnacle.R
 import random.barnacle.ui.nav.Routes
 import random.barnacle.ui.screens.analytics.AnalyticsScreen
@@ -29,22 +32,29 @@ import random.barnacle.ui.screens.wallet.WalletScreen
 import random.barnacle.ui.AppViewModel
 
 @Composable
-fun AppNav() {
-    val navController = rememberNavController()
+fun MainScreen(
+    intendSender: ActivityResultSender? = null,
+    navController: NavHostController = rememberNavController(),
+    viewModel: AppViewModel = hiltViewModel()
+) {
+    val viewState by viewModel.viewState.collectAsState()
+
+    val fakeState = viewModel.fakeState.userAddress
 
     MainMenu(navController = navController)
-
-    val appViewModel: AppViewModel = hiltViewModel()
 
     NavHost(navController = navController, startDestination = Routes.WALLET) {
         composable(Routes.TOKENS) {
             TokensScreen(
-                appViewModel,
+                viewModel,
             )
         }
 
         composable(Routes.WALLET) {
-            WalletScreen(navController = navController)
+            WalletScreen(
+                navController = navController,
+                fakeState = fakeState
+            )
         }
 
         composable(Routes.ANALYTICS) {
