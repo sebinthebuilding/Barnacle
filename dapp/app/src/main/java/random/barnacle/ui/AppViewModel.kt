@@ -5,21 +5,49 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.solana.mobilewalletadapter.clientlib.MobileWalletAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import random.barnacle.data.repositories.PriceRepository
 import random.barnacle.data.repositories.TokensRepository
 import random.barnacle.domain.QuoteCurrencies
 import random.barnacle.domain.models.TokenModel
+import random.barnacle.domain.use_cases.PersistenceUseCase
 import javax.inject.Inject
+
+data class MainViewState(
+    val isLoading: Boolean = false,
+    val canTransact: Boolean = false,
+    val solBalance: Double = 0.0,
+    val userAddress: String = "TEST",
+    val userLabel: String = "",
+    val walletFound: Boolean = true
+)
 
 @HiltViewModel
 class AppViewModel @Inject constructor(
+    private val walletAdapter: MobileWalletAdapter,
+    private val persistenceUseCase: PersistenceUseCase,
+
     private val tokensRepository: TokensRepository,
     private val priceRepository: PriceRepository
 ): ViewModel() {
+
+    private fun MainViewState.updateViewState() {
+        _state.update { this }
+    }
+
+    private val _state = MutableStateFlow(MainViewState())
+
+    val viewState: StateFlow<MainViewState>
+        get() = _state
+
+    val fakeState = MainViewState()
+
     var allTokensUiState: List<TokenModel> = emptyList()
 
     val allPricesUiState: MutableStateFlow<Map<String, Double>> = MutableStateFlow<Map<String, Double>>(emptyMap())
