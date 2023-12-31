@@ -39,8 +39,6 @@ fun MainScreen(
 ) {
     val viewState by viewModel.viewState.collectAsState()
 
-    val fakeState = viewModel.fakeState.userAddress
-
     MainMenu(navController = navController)
 
     NavHost(navController = navController, startDestination = Routes.WALLET) {
@@ -53,7 +51,7 @@ fun MainScreen(
         composable(Routes.WALLET) {
             WalletScreen(
                 navController = navController,
-                fakeState = fakeState
+                state = viewState.userAddress
             )
         }
 
