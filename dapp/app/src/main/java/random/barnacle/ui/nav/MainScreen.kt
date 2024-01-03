@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -35,7 +37,7 @@ fun MainScreen(
     navController: NavHostController = rememberNavController(),
     appViewModel: AppViewModel = hiltViewModel()
 ) {
-    val call = appViewModel.viewState
+    val call by appViewModel.viewState.collectAsState()
 
     MainMenu(navController = navController)
 
